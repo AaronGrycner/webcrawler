@@ -2,7 +2,7 @@ import os
 from urllib.parse import urlparse
 
 
-# this variable is contains the base url to be crawled
+# this variable contains the base url to be crawled
 base_url = "https://primates.dev/"
 
 # this code extracts the site name from the URL and stores it in variable "project_name"
