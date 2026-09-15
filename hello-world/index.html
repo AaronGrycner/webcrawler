@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hello World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #10231c;
+      --paper: #f3f7f2;
+      --accent: #1f7a5c;
+      --mist: rgba(255, 255, 255, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Outfit", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 90% 70% at 15% 20%, #b8e0c8 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 85% 75%, #9ec9e8 0%, transparent 50%),
+        linear-gradient(160deg, #e8f3ec 0%, #dce8f2 45%, #e6efe8 100%);
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .stage {
+      width: min(720px, 100%);
+      text-align: center;
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .brand {
+      font-family: "Fraunces", serif;
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: var(--ink);
+      animation: fade-in 1s ease 0.15s both;
+    }
+
+    .brand span {
+      display: inline-block;
+      color: var(--accent);
+      animation: wave 2.4s ease-in-out 0.8s infinite;
+    }
+
+    .lede {
+      margin-top: 1.25rem;
+      font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: #355045;
+      max-width: 28ch;
+      margin-inline: auto;
+      animation: fade-in 1s ease 0.35s both;
+    }
+
+    .cta {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.4rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper);
+      font: inherit;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      animation: fade-in 1s ease 0.5s both;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .cta:active {
+      transform: translateY(0);
+    }
+
+    .orb {
+      position: fixed;
+      width: 42vmax;
+      height: 42vmax;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--mist), transparent 65%);
+      pointer-events: none;
+      animation: drift 12s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    .orb-a { top: -18vmax; left: -10vmax; }
+    .orb-b {
+      bottom: -20vmax;
+      right: -12vmax;
+      animation-delay: -4s;
+      animation-duration: 16s;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(12deg); }
+      50% { transform: rotate(-6deg); }
+      75% { transform: rotate(8deg); }
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(4vmax, 3vmax); }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <main class="stage">
+    <h1 class="brand">Hello <span>World</span></h1>
+    <p class="lede">A tiny local page, served right here in this environment.</p>
+    <button class="cta" type="button" id="waveBtn">Say hello again</button>
+  </main>
+  <script>
+    const btn = document.getElementById("waveBtn");
+    btn.addEventListener("click", () => {
+      const word = document.querySelector(".brand span");
+      word.style.animation = "none";
+      void word.offsetWidth;
+      word.style.animation = "";
+    });
+  </script>
+</body>
+</html>
